@@ -1,4 +1,4 @@
-package com.company;
+package Aishik;
 import com.zetcode.Board;
 import java.util.Random;
 import java.util.Scanner;
@@ -41,24 +41,19 @@ public class tic_tac_toe_console {
         for (int i = 0; i < 9; i++) {
             board[i] = "_";
         }
-        board_Print(board);
         for (int i = 0; i < 9; i++) {
             if (X_won) {
                 int q;
                 System.out.println("...X's Turn...");
-                while (true) {
                     System.out.println("enter the box number");
                     q = s.nextInt();
                     if (board[q].equals("X") || board[q].equals("O")) {
-                        System.out.println("Wrong Input, Enter Again");
-                        q = s.nextInt();
-                    } else if (!(board[q].equals("X")) || !(board[q].equals("O"))) {
-                        break;
+                        continue;
+                    } else {
+                        board[q] = "X";
+                        X_won = false;
+                        win_Check(board);
                     }
-                }
-                board[q] = "X";
-                X_won = false;
-                win_Check(board);
             } else {
                 int comp = r.nextInt(9);
                 System.out.println("...O's Turn...");
@@ -83,39 +78,32 @@ public class tic_tac_toe_console {
             if (X_won) {
                 int q;
                 System.out.println("...X's Turn...");
-                while (true) {
-                    System.out.println("enter the box number");
-                    q = s.nextInt();
-                    if (board[q].equals("X") || board[q].equals("O")) {
-                        System.out.println("Wrong Input, Enter Again");
-                        q = s.nextInt();
-                    } else if (!(board[q].equals("X")) || !(board[q].equals("O"))) {
-                        break;
-                    }
+                System.out.println("enter the box number");
+                q = s.nextInt();
+                if (board[q].equals("X") || board[q].equals("O")) {
+                    continue;
+                } else {
+                    board[q] = "X";
+                    X_won = false;
+                    win_Check(board);
                 }
-                board[q] = "X";
-                X_won = false;
-                win_Check(board);
             } else {
                 int q;
                 System.out.println("...O's Turn...");
-                while (true) {
-                    System.out.println("enter the box number");
-                    q = s.nextInt();
-                    if (board[q].equals("X") || board[q].equals("O")) {
-                        System.out.println("Wrong Input, Enter Again");
-                        q = s.nextInt();
-                    } else if (!(board[q].equals("X")) || !(board[q].equals("O"))) {
-                        break;
-                    }
+                System.out.println("enter the box number");
+                q = s.nextInt();
+                if (board[q].equals("X") || board[q].equals("O")) {
+                    continue;
+                } else {
+                    board[q] = "O";
+                    X_won = true;
+                    win_Check(board);
                 }
-                board[q] = "O";
-                X_won = true;
-                win_Check(board);
-            }
-            board_Print(board);
         }
-    }
+            board_Print(board);
+            }
+
+        }
     static void board_Print(String[] board) {
         System.out.println("Board Update");
         System.out.println(board[0] + "|" + board[1] + "|" + board[2]);
@@ -124,7 +112,6 @@ public class tic_tac_toe_console {
     }
     static void win_Check(String[] board) {
         String line = " ";
-        int ee=1;
         for (int i = 0; i <= 8; i++) {
             switch (i) {
                 case 1 -> line = board[0] + board[1] + board[2];
